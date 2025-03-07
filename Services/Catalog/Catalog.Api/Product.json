@@ -1,0 +1,18 @@
+[
+  {
+    "Name": "Asus Laptop",
+    "Category": "Computer",
+    "Summary": "Summary",
+    "Description": "Description",
+    "ImageFile": "ImageFile",
+    "Peice": "200"
+  },
+  {
+    "Name": "Hp Laptop",
+    "Category": "Computer",
+    "Summary": "Summary",
+    "Description": "Description",
+    "ImageFile": "ImageFile",
+    "Peice": "100"
+  }
+]
