@@ -15,10 +15,14 @@
         public decimal TotalPrice { get
             {
                 decimal totalPrice = 0;
-                foreach (var item in Items)
+                if(Items != null && Items.Any())
                 {
-                    totalPrice += item.Price * Convert.ToDecimal(item.Quantity);
+                    foreach (var item in Items)
+                    {
+                        totalPrice += item.Price * Convert.ToDecimal(item.Quantity);
+                    }
                 }
+                
                 return totalPrice;
 
             } }
