@@ -14,24 +14,19 @@ namespace Discount.Api.Repositories
         {
             _configuration = configuration;
         }
-        #endregion
-
-
-        #region Get Coupon
         public async Task<Coupon> GetDiscount(string productName)
         {
             using var connection = new NpgsqlConnection
                 (_configuration.GetValue<string>("DataBaseSettings:ConnectionString"));
 
-            var coupon = await connection.QueryFirstAsync<Coupon>
-                ("SELECT * FROM Coupon WHERE ProductName = @ProductName", new {ProductName = productName});
+            var coupon = await connection.QueryFirstOrDefaultAsync<Coupon>
+                ("SELECT * FROM Coupon WHERE ProductName = @ProductName", new { ProductName = productName });
 
             if (coupon == null)
             {
                 return new Coupon() { ProductName = "No Discount", Description = "No Discount Description", Amount = 0 };
             }
             return coupon;
-
         }
         #endregion
 
@@ -50,15 +45,14 @@ namespace Discount.Api.Repositories
             return true;
         }
         #endregion
-
         #region Update Coupon
         public async Task<bool> UpdateDiscount(Coupon coupon)
         {
             using var connection = new NpgsqlConnection
                 (_configuration.GetValue<string>("DataBaseSettings:ConnectionString"));
 
-            var affected = await connection.ExecuteAsync("UPDATE Coupon SET ProductName=@ProductName, Description=@Description, Amount=@Amount",
-                new { ProductName = coupon.ProductName, Description = coupon.Description, Amount = coupon.Amount });
+            var affected = await connection.ExecuteAsync("UPDATE Coupon SET ProductName=@ProductName, Description=@Description, Amount=@Amount WHERE Id=@Id",
+                new { ProductName = coupon.ProductName, Description = coupon.Description, Amount = coupon.Amount, Id = coupon.Id });
 
             if (affected == 0) return false;
 

@@ -39,7 +39,7 @@ namespace Discount.Api.Controllers
         public async Task<ActionResult<Coupon>> CreateDiscount([FromForm] Coupon coupon)
         {
             await _discountRepository.CreateDiscount(coupon);
-            return CreatedAtRoute("GetDiscount", new {produuctName=coupon.ProductName}, coupon);
+            return CreatedAtRoute("GetDiscount", new { productName = coupon.ProductName}, coupon);
         }
         #endregion
 

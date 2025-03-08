@@ -1,3 +1,4 @@
+using Discount.Api.Extensions;
 using Discount.Api.Repositories;
 using System.Threading.RateLimiting;
 
@@ -13,6 +14,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
 
 var app = builder.Build();
+
+app.Services.MigrateDatabase();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
