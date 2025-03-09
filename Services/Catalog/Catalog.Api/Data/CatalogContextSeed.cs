@@ -21,7 +21,7 @@ namespace Catalog.Api.Data
                             new Product
                             {
                                 Id = "5f47ac10b5e4c0001c8d4c1a",
-                                Name = "iPhone X",
+                                Name = "IPhone X",
                                 Category = "Smartphone",
                                 Description = "Apple iPhone X with 64GB memory",
                                 Summary = "Apple iPhone X",
@@ -31,7 +31,7 @@ namespace Catalog.Api.Data
                             new Product
                             {
                                 Id = "5f47ac10b5e4c0001c8d4c1b",
-                                Name = "Samsung Galaxy S10",
+                                Name = "Samsung 10",
                                 Category = "Smartphone",
                                 Description = "Samsung Galaxy S10 with 128GB memory",
                                 Summary = "Samsung Galaxy S10",

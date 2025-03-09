@@ -12,11 +12,15 @@ builder.Services.AddStackExchangeRedisCache(options =>
 });
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
-builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
-    options =>
-    {
-        options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]);
-    });
+//builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
+//    options =>
+//    {
+//        options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]);
+//    });
+
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
+           (o => o.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]
+                                    ?? throw new Exception("Configration Not found")));
 builder.Services.AddScoped<DiscountGrpcService>();
 
 builder.Services.AddControllers();
