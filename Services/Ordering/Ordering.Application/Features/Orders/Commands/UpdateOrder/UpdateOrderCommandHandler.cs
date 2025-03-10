@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Ordering.Application.Contracts.Persistence;
+using Ordering.Application.Exeptions;
 using Ordering.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Ordering.Application.Features.Orders.Commands.UpdateOrder
         private readonly IMapper _mapper;
         private readonly ILogger<UpdateOrderCommandHandler> _logger;
 
-        public UpdateOrderCommandHandler(IOrderRepository orderRepository , IMapper mapper , ILogger<UpdateOrderCommandHandler> logger)
+        public UpdateOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, ILogger<UpdateOrderCommandHandler> logger)
         {
             _logger = logger;
             _mapper = mapper;
@@ -30,6 +31,7 @@ namespace Ordering.Application.Features.Orders.Commands.UpdateOrder
             if (orderForUpdate == null)
             {
                 _logger.LogError($"order with id {request.Id} not exist");
+                throw new NotFoundExeption(nameof(Order), request.Id);
             }
             else
             {
@@ -39,7 +41,7 @@ namespace Ordering.Application.Features.Orders.Commands.UpdateOrder
                 _logger.LogInformation($"Order {orderForUpdate.Id} is successfully updated.");
             }
 
-                
+
 
             //return Unit.Value;
         }
