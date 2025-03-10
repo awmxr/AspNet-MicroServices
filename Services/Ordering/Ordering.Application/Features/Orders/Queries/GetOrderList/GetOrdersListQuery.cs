@@ -8,9 +8,13 @@ using System.Threading.Tasks;
 
 namespace Ordering.Application.Features.Orders.Queries.GetOrderList
 {
-    class GetOrdersListQuery(string userName) : IRequest<List<OrdersDto>>
+    public class GetOrdersListQuery : IRequest<List<OrdersDto>>
     {
-        public string UserName { get; set; } = userName;
-        
+        public string UserName { get; set; }
+        public GetOrdersListQuery(string userName)
+        {
+            UserName = userName;
+        }
+
     }
 }
