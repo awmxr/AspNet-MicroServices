@@ -27,10 +27,19 @@ namespace Ordering.Application.Features.Orders.Commands.UpdateOrder
         public async Task Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
             var orderForUpdate = await _orderRepository.GetByIdAsync(request.Id);
-            _mapper.Map(request , orderForUpdate, typeof(UpdateOrderCommand), typeof(Order));
-            await _orderRepository.UpdateAsync(orderForUpdate);
+            if (orderForUpdate == null)
+            {
+                _logger.LogError($"order with id {request.Id} not exist");
+            }
+            else
+            {
+                _mapper.Map(request, orderForUpdate, typeof(UpdateOrderCommand), typeof(Order));
+                await _orderRepository.UpdateAsync(orderForUpdate);
 
-            _logger.LogInformation($"Order {orderForUpdate.Id} is successfully updated.");
+                _logger.LogInformation($"Order {orderForUpdate.Id} is successfully updated.");
+            }
+
+                
 
             //return Unit.Value;
         }
