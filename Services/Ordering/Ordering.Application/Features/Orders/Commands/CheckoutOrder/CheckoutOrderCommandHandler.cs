@@ -18,9 +18,9 @@ namespace Ordering.Application.Features.Orders.Commands.CheckoutOrder
         #region Constructor
         private readonly IOrderRepository _orderRepository;
         private readonly IEmailService _emailService;
-        private readonly ILogger _logger;
+        private readonly ILogger<CheckoutOrderCommandHandler> _logger;
         private readonly IMapper _mapper;
-        public CheckoutOrderCommandHandler(IOrderRepository orderRepository, IEmailService emailService, ILogger logger, IMapper mapper)
+        public CheckoutOrderCommandHandler(IOrderRepository orderRepository, IEmailService emailService, ILogger<CheckoutOrderCommandHandler> logger, IMapper mapper)
         {
             _orderRepository = orderRepository;
             _emailService = emailService;

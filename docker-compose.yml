@@ -11,6 +11,9 @@ services:
   pgadmin:
     image: dpage/pgadmin4
 
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+
   portainer:
     image: portainer/portainer-ce
 

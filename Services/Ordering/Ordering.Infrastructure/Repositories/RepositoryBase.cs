@@ -91,14 +91,14 @@ namespace Ordering.Infrastructure.Repositories
 
         public async Task DeleteAsync(T entity)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
+            _query.Remove(entity);
             await _dbContext.SaveChangesAsync();
-
         }
         public async Task UpdateAsync(T entity)
         {
-            _query.Remove(entity);
+            _dbContext.Entry(entity).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
+           
         }
     }
 
