@@ -11,7 +11,7 @@ namespace Ordering.Infrastructure.Persistence
 {
     public class OrderContextSeed
     {
-        public async Task SeedAsync(OrderContext orderContext , ILogger<OrderContextSeed> logger)
+        public static async Task SeedAsync(OrderContext orderContext , ILogger<OrderContextSeed> logger)
         {
             if (!await orderContext.Orders.AnyAsync())
             {
