@@ -1,6 +1,8 @@
 using Basket.Api.GrpcServices;
 using Basket.Api.Repositories;
 using Discount.Grpc.Protos;
+using MassTransit;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,15 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
            (o => o.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]
                                     ?? throw new Exception("Configration Not found")));
 builder.Services.AddScoped<DiscountGrpcService>();
+builder.Services.AddMassTransit(config =>
+{
+    config.UsingRabbitMq((ctx,conf) => {
+        conf.Host(builder.Configuration.GetValue<string>("EventBusSettings:HostAddress"));
+});
+});
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+//builder.Services.AddMassTransitHostedService();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
