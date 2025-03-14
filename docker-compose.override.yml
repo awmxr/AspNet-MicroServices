@@ -142,3 +142,19 @@ services:
     ports:
       - "8010:8080"
 
+
+  shopping.aggregator:
+    container_name: shopping.aggregator
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - "ApiSettings:CatalogUrl=http://host.docker.internal:8000" 
+      - "ApiSettings:BsketUrl=http://host.docker.internal:8001" 
+      - "ApiSettings:OrderingUrl=http://host.docker.internal:8004" 
+    depends_on:
+      - catalog.api
+      - basket.api
+      - ordering.api
+    ports:
+      - "8005:8080"
+
